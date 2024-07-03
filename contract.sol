@@ -39,6 +39,8 @@ contract ERC20{
 
               totalsupply += value;
 
+              emit Transfer(address(0), to , value);
+
       }
 
 
@@ -53,13 +55,15 @@ contract ERC20{
             balanceof[from] -= value;
             totalsupply -= value;
 
+            emit Transfer(from, address(0),value);
+
 
       }
 
 
       function burn(address from, uint256 value) external {
         require(msg.sender == owner);
-        _burn(from,value);
+        _burn(from,value);--
       }
 
 
