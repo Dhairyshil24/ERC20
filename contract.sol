@@ -49,6 +49,19 @@ contract ERC20{
 
       }
 
+      function _burn(address from, uint256 value) private{
+            balanceof[from] -= value;
+            totalsupply -= value;
+
+
+      }
+
+
+      function burn(address from, uint256 value) external {
+        require(msg.sender == owner);
+        _burn(from,value);
+      }
+
 
 
 
