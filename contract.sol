@@ -8,6 +8,7 @@ contract ERC20{
       string public symbol;
       uint256 immutable public decimals;
      uint256 public totalsupply;
+     address public owner;
 
       event Transfer(address indexed from, address indexed to, uint256 value);
       event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -29,6 +30,22 @@ contract ERC20{
          _transfer(msg.sender, state, to, value);
 
          return true;
+
+      }
+
+      function _mint(address to, uint256 value) private {
+              
+              balanceof[to] += value;
+
+              totalsupply += value;
+
+      }
+
+
+      function mint(address to, uint256 value) external {
+
+        require(msg.sender == owner);
+        _mint(to, value);
 
       }
 
